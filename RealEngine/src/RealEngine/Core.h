@@ -9,3 +9,6 @@
 #else
 	#error Real Engine Only Support Windows
 #endif // RE_PLATFORM_WINDOWS
+
+
+#define BIT(x)(1 << x)
