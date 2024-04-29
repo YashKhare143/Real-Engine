@@ -1,9 +1,11 @@
 #pragma once
 
+
+//#include "spdlog/fmt/ostr.h"
+//#include "EventFormatter.h"
 #include "RealEngine/Core.h"
 #include <string>
 #include <functional>
-#include "spdlog/fmt/ostr.h"
 
 namespace RealEngine {
 
@@ -56,7 +58,7 @@ namespace RealEngine {
 
 	class EventDispatcher
 	{
-		template<typename T>
+		template<typename T> 
 		using EventFn = std::function<bool(T&)>;
 
 	public:
@@ -72,7 +74,10 @@ namespace RealEngine {
 				return true;
 			}
 			return false;
-		}
+		};
+
+
+
 	private:
 		Event& m_Event;
 	};
@@ -81,4 +86,12 @@ namespace RealEngine {
 	{
 		return os << e.ToString();
 	}
+
 }
+
+
+
+
+//namespace fmt {
+
+//}

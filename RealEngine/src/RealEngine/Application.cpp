@@ -1,3 +1,4 @@
+#include "repch.h"
 #include "Application.h"
 #include "stdio.h"
 
@@ -9,9 +10,9 @@ namespace RealEngine {
 	Application::~Application() {};
 
 	void Application::Run() {
-		printf("Welcom To Real Engine!");
+		printf("Welcom To Real Engine!\n");
 		WindowResizeEvent e(1280, 720);
-		//RE_TRACE(e);
+		RE_TRACE(e);
 		while (true);
 	}
 }

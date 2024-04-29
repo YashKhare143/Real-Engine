@@ -34,6 +34,7 @@
     <ClInclude Include="src\RealEngine\Log.h">
       <Filter>RealEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\repch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\RealEngine\Application.cpp">
@@ -42,5 +43,6 @@
     <ClCompile Include="src\RealEngine\Log.cpp">
       <Filter>RealEngine</Filter>
     </ClCompile>
+    <ClCompile Include="src\repch.cpp" />
   </ItemGroup>
 </Project>
