@@ -1,0 +1,3 @@
+[submodule "RealEngine/vendor/GLFW"]
+	path = RealEngine/vendor/GLFW
+	url = https://github.com/TheCherno/GLFW

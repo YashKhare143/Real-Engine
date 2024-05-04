@@ -19,6 +19,9 @@
     <ClInclude Include="src\RealEngine\EntryPoint.h">
       <Filter>RealEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\RealEngine\EventFormatter.h">
+      <Filter>RealEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\RealEngine\Events\ApplicationEvent.h">
       <Filter>RealEngine\Events</Filter>
     </ClInclude>
@@ -35,6 +38,8 @@
       <Filter>RealEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\repch.h" />
+    <ClInclude Include="src\RealEngine\Window.h" />
+    <ClInclude Include="Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\RealEngine\Application.cpp">
@@ -44,5 +49,6 @@
       <Filter>RealEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\repch.cpp" />
+    <ClCompile Include="Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

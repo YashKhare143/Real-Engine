@@ -6,13 +6,16 @@
 #include "RealEngine/Log.h"
 
 namespace RealEngine {
-	Application::Application() {};
+	Application::Application() {
+		m_Window = std::unique_ptr<Window>(Window::Create());
+	};
 	Application::~Application() {};
 
 	void Application::Run() {
-		printf("Welcom To Real Engine!\n");
-		WindowResizeEvent e(1280, 720);
-		RE_TRACE(e);
-		while (true);
+		
+		while (m_Running)
+		{
+			m_Window->OnUpdate();
+		}
 	}
 }
