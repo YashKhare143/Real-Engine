@@ -1,6 +1,7 @@
 #pragma once
 #include "RealEngine/Core.h"
 #include "RealEngine/Events/Event.h"
+#include "RealEngine/Events/ApplicationEvent.h"
 
 namespace RealEngine {
 	struct WindowProps
@@ -22,7 +23,7 @@ namespace RealEngine {
 
 		virtual ~Window(){}
 
-		virtual void OnUpdate() = 0;
+		virtual void WindowOnUpdate() = 0;
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
 

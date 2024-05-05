@@ -62,14 +62,17 @@ project "RealEngine"
 
 	filter "configurations:Debug"
 		defines "RE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "RE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "RE_Dist"
+		buildoptions "/MD"
 		optimize "On"
 
 
@@ -121,14 +124,18 @@ project "Sandbox"
 			"RE_PLATFORM_WINDOWS"
 		}
 
+
 	filter "configurations:Debug"
 		defines "RE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "RE_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "RE_Dist"
+		buildoptions "/MD"
 		optimize "On"
