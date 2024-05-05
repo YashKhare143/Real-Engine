@@ -3,6 +3,8 @@
 #include "RealEngine/Events/ApplicationEvent.h"
 #include "RealEngine/Events/KeyEvent.h"
 #include "RealEngine/Events/MouseEvent.h"
+#include <glad/glad.h>
+//#include <GLFW/glfw3.h>
 
 namespace RealEngine {
 
@@ -41,7 +43,12 @@ namespace RealEngine {
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
+
+
+		glfwMakeContextCurrent(m_Window);	
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		RE_CORE_ASSERT(status, "Failed tp initialize Glad!");
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

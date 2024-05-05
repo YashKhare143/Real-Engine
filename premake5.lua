@@ -13,7 +13,9 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "RealEngine/vendor/GLFW/include"
+IncludeDir["Glad"] = "RealEngine/vendor/Glad/include"
 include "RealEngine/vendor/GLFW"
+include "RealEngine/vendor/Glad"
 
 project "RealEngine"
 	location "RealEngine"
@@ -36,11 +38,13 @@ project "RealEngine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include;",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -52,7 +56,8 @@ project "RealEngine"
 		defines
 		{
 			"RE_PLATFORM_WINDOWS",
-			"RE_BUILD_DLL"
+			"RE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
