@@ -56,6 +56,8 @@
       <Filter>RealEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\repch.h" />
+    <ClInclude Include="src\RealEngine\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Platform\OpenGl\ImGuiOpenGLRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
@@ -74,5 +76,7 @@
       <Filter>RealEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\repch.cpp" />
+    <ClCompile Include="src\RealEngine\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Platform\OpenGl\ImGuiOpenGLRenderer.cpp" />
   </ItemGroup>
 </Project>

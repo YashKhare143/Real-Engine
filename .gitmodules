@@ -1,3 +1,6 @@
 [submodule "RealEngine/vendor/GLFW"]
 	path = RealEngine/vendor/GLFW
 	url = https://github.com/TheCherno/GLFW
+[submodule "RealEngine/vendor/imgui"]
+	path = RealEngine/vendor/imgui
+	url = https://github.com/TheCherno/imgui.git
