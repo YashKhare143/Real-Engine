@@ -1,6 +1,7 @@
 workspace "RealEngine"
 
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -67,7 +68,7 @@ project "RealEngine"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"

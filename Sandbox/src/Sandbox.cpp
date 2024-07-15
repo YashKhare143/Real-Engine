@@ -8,11 +8,18 @@ public:
 	}
 	void OnUpdate() override
 	{
-		RE_INFO("ExampleLayer::Update");
+		//RE_INFO("ExampleLayer::Update");
+		//if (RealEngine::Input::IsKeyPressed(RE_KEY_SPACE))
+		//	RE_TRACE("Space Button Pressed");
 	}
 	void OnEvent(RealEngine::Event& event) override
 	{
-		RE_TRACE("{0}",event);
+		//RE_TRACE("{0}",event);
+		if (event.GetEventType() == RealEngine::EventType::KeyPressed) {
+			RealEngine::KeyPressedEvent& e = (RealEngine::KeyPressedEvent&)event;
+			RE_TRACE("{0}", (char)e.GetKeyCode());
+		}
+
 	}
 };
 

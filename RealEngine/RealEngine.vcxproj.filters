@@ -4,6 +4,9 @@
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform\OpenGl">
+      <UniqueIdentifier>{3E7D2C1D-AA08-9AE1-B319-1DD61F24F6E1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
@@ -13,8 +16,14 @@
     <Filter Include="RealEngine\Events">
       <UniqueIdentifier>{03F6DFFB-6F0C-DE91-B883-69B324D9AE19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RealEngine\ImGui">
+      <UniqueIdentifier>{6977323E-5570-5190-7EA2-36156AFA309C}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGl\ImGuiOpenGLRenderer.h">
+      <Filter>Platform\OpenGl</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -43,6 +52,9 @@
     <ClInclude Include="src\RealEngine\Events\MouseEvent.h">
       <Filter>RealEngine\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\RealEngine\ImGui\ImGuiLayer.h">
+      <Filter>RealEngine\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\RealEngine\Layer.h">
       <Filter>RealEngine</Filter>
     </ClInclude>
@@ -56,15 +68,23 @@
       <Filter>RealEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\repch.h" />
-    <ClInclude Include="src\RealEngine\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Platform\OpenGl\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\RealEngine\Input.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\RealEngine\KeyCodes.h" />
+    <ClInclude Include="src\RealEngine\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGl\ImGuiOpenGLRenderer.cpp">
+      <Filter>Platform\OpenGl</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\RealEngine\Application.cpp">
       <Filter>RealEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RealEngine\ImGui\ImGuiLayer.cpp">
+      <Filter>RealEngine\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\RealEngine\Layer.cpp">
       <Filter>RealEngine</Filter>
@@ -76,7 +96,6 @@
       <Filter>RealEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\repch.cpp" />
-    <ClCompile Include="src\RealEngine\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Platform\OpenGl\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

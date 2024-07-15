@@ -95,7 +95,7 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\RealEngine\RealEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\RealEngine\RealEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\RealEngine\RealEngine.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\RealEngine\RealEngine.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\RealEngine\RealEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\RealEngine\RealEngine.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\RealEngine\RealEngine.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,7 +123,7 @@
       <ImportLibrary>..\bin\Release-windows-x86_64\RealEngine\RealEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\RealEngine\RealEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\RealEngine\RealEngine.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\RealEngine\RealEngine.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\RealEngine\RealEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\RealEngine\RealEngine.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\RealEngine\RealEngine.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -151,12 +151,12 @@
       <ImportLibrary>..\bin\Dist-windows-x86_64\RealEngine\RealEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\RealEngine\RealEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\RealEngine\RealEngine.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\RealEngine\RealEngine.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\RealEngine\RealEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\RealEngine\RealEngine.dll "..\bin\Dist-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\RealEngine\RealEngine.dll "..\bin\Dist-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\RealEngine\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Platform\OpenGl\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\RealEngine.h" />
     <ClInclude Include="src\RealEngine\Application.h" />
@@ -167,20 +167,25 @@
     <ClInclude Include="src\RealEngine\Events\Event.h" />
     <ClInclude Include="src\RealEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\RealEngine\Events\MouseEvent.h" />
+    <ClInclude Include="src\RealEngine\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\RealEngine\Input.h" />
+    <ClInclude Include="src\RealEngine\KeyCodes.h" />
     <ClInclude Include="src\RealEngine\Layer.h" />
     <ClInclude Include="src\RealEngine\LayerStack.h" />
     <ClInclude Include="src\RealEngine\Log.h" />
+    <ClInclude Include="src\RealEngine\MouseButtonCodes.h" />
     <ClInclude Include="src\RealEngine\Window.h" />
     <ClInclude Include="src\repch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\RealEngine\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Platform\OpenGl\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\RealEngine\Application.cpp" />
+    <ClCompile Include="src\RealEngine\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\RealEngine\Layer.cpp" />
     <ClCompile Include="src\RealEngine\LayerStack.cpp" />
     <ClCompile Include="src\RealEngine\Log.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\repch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

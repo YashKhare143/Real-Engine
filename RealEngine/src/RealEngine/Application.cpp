@@ -4,6 +4,7 @@
 #include "RealEngine/Log.h"
 
 #include <glad/glad.h>
+#include "Input.h"
 
 namespace RealEngine {
 
@@ -18,8 +19,9 @@ namespace RealEngine {
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
-		unsigned int id;
-		glGenVertexArrays(1, &id);
+		//unsigned int id;
+		//glGenVertexArrays(1, &id);
+
 	};
 	Application::~Application() {};
 	
@@ -39,7 +41,7 @@ namespace RealEngine {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-		RE_TRACE("{0}", e);
+		//RE_TRACE("{0}", e);
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
@@ -59,6 +61,7 @@ namespace RealEngine {
 			}
 
 			m_Window->WindowOnUpdate();
+			glClear(GL_COLOR_BUFFER_BIT);
 		}
 	}
 
