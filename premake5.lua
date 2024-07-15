@@ -15,7 +15,8 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "RealEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "RealEngine/vendor/Glad/include"
-IncludeDir["ImGui"] = "RealEngine/vendor/imgui/"
+IncludeDir["ImGui"] = "RealEngine/vendor/imgui"
+IncludeDir["glm"] = "RealEngine/vendor/glm"
 
 include "RealEngine/vendor/GLFW"
 include "RealEngine/vendor/Glad"
@@ -23,8 +24,11 @@ include "RealEngine/vendor/Imgui"
 
 project "RealEngine"
 	location "RealEngine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -34,17 +38,23 @@ project "RealEngine"
 
 	files
 	{
-		"%{prj.name}/src/**h",
-		"%{prj.name}/src/**cpp",
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
-		
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
 	includedirs
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include;",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 	links
 	{
@@ -55,8 +65,6 @@ project "RealEngine"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -66,59 +74,47 @@ project "RealEngine"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
-
 	filter "configurations:Debug"
 		defines "RE_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 	
 	filter "configurations:Release"
 		defines "RE_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
-		defines "RE_Dist"
-		buildoptions "/MD"
-		optimize "On"
+		defines "RE_DIST"
+		runtime "Release"
+		optimize "on"
 
 
-
-	workspace "RealEngine"
-
-	architecture "x64"
-
-	configurations
-	{
-		"Debug",
-		"Release",
-		"Dist"
-	}
-
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+-- outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "Sandbox"
-	location "RealEngine"
+	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
-		"%{prj.name}/src/**h",
-		"%{prj.name}/src/**cpp"
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
 	}
 
 	includedirs
 	{
 		"RealEngine/vendor/spdlog/include;",
-		"RealEngine/src"
+		"RealEngine/src",
+		"RealEngine/vendor",
+		"%{IncludeDir.glm}"
 	}
 
 	links{
@@ -126,8 +122,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -135,18 +129,17 @@ project "Sandbox"
 			"RE_PLATFORM_WINDOWS"
 		}
 
-
 	filter "configurations:Debug"
 		defines "RE_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 	
 	filter "configurations:Release"
 		defines "RE_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
-		defines "RE_Dist"
-		buildoptions "/MD"
-		optimize "On"
+		defines "RE_DIST"
+		runtime "Release"
+		optimize "on"

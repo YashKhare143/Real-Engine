@@ -1,5 +1,6 @@
 #include <RealEngine.h>
-
+#include "imgui/imgui.h"
+ 
 class ExampleLayer : public RealEngine::Layer
 {
 public:
@@ -12,6 +13,15 @@ public:
 		//if (RealEngine::Input::IsKeyPressed(RE_KEY_SPACE))
 		//	RE_TRACE("Space Button Pressed");
 	}
+
+	virtual void  OnImGuiRender() override {
+		auto m_ImGuiLayer = new RealEngine::ImGuiLayer();
+
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
+	}
+
 	void OnEvent(RealEngine::Event& event) override
 	{
 		//RE_TRACE("{0}",event);
@@ -28,7 +38,6 @@ class Sandbox : public RealEngine::Application
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
-		PushOverlay(new RealEngine::ImGuiLayer());
 	}
 
 	~Sandbox() {
