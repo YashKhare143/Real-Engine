@@ -15,11 +15,11 @@ public:
 	}
 
 	virtual void  OnImGuiRender() override {
-		auto m_ImGuiLayer = new RealEngine::ImGuiLayer();
+		//auto m_ImGuiLayer = new RealEngine::ImGuiLayer();
 
-		ImGui::Begin("Test");
-		ImGui::Text("Hello World");
-		ImGui::End();
+		//ImGui::Begin("Test");
+		//ImGui::Text("Hello World");
+		//ImGui::End();
 	}
 
 	void OnEvent(RealEngine::Event& event) override

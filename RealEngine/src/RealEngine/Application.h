@@ -7,6 +7,9 @@
 #include "RealEngine/Events/ApplicationEvent.h"	
 
 #include "RealEngine/ImGui/ImGuiLayer.h"
+#include "RealEngine/Renderer/Shader.h"
+#include "RealEngine/Renderer/Buffer.h"
+#include "RealEngine/Renderer/VertexArray.h"
 
 namespace RealEngine {
 
@@ -31,6 +34,12 @@ namespace RealEngine {
 		LayerStack m_LayerStack;
 
 		static Application* s_Instance;
+
+
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 	};
 	Application* CreateApplication();
 
