@@ -5,7 +5,7 @@
 #include "backends/imgui_impl_opengl3.h"
 #include "backends/imgui_impl_glfw.h"
 
-#include "RealEngine/Application.h"
+#include "RealEngine/Core/Application.h"
 //Temporary
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -58,7 +58,7 @@ namespace RealEngine {
 	void ImGuiLayer::OnImGuiRender()
 	{
 		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		//ImGui::ShowDemoWindow(&show);
 	}
 
 	void ImGuiLayer::Begin()
@@ -66,6 +66,7 @@ namespace RealEngine {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+
 	}
 
 	void ImGuiLayer::End()

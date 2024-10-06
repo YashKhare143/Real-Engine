@@ -1,6 +1,7 @@
 #pragma once
 #include "RealEngine/Events/Event.h"
-#include "RealEngine/Core.h"
+#include "RealEngine/Core/Core.h"
+#include "RealEngine/Core/Timestep.h"
 
 
 namespace RealEngine {
@@ -13,7 +14,7 @@ namespace RealEngine {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

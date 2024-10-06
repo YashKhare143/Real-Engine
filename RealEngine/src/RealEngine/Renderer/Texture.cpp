@@ -1,30 +1,10 @@
 #include "repch.h"
-#include "Buffer.h"
-
+#include "Texture.h"
 #include "Renderer.h"
-#include "Platform/OpenGl/OpenGLBuffer.h"
+#include "Platform/OpenGl/OpenGLTexture.h"
 
 namespace RealEngine {
-	void VertexBuffer::SetLayour(const BufferLayout& layout)
-	{
-	}
-	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
-	{
-		switch (Renderer::GetAPI())
-		{
-		case RendererAPI::API::None:
-			RE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); 
-			return nullptr;
-
-		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
-
-		}
-		RE_CORE_ASSERT(false, "Unknown Renderer API!");
-		return nullptr;
-	}
-
-	Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t count)
+	Ref<Texture2D> Texture2D::Create(const uint32_t width, const uint32_t height)
 	{
 		switch (Renderer::GetAPI())
 		{
@@ -33,11 +13,24 @@ namespace RealEngine {
 			return nullptr;
 
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLIndexBuffer>(indices, count);
+			return CreateRef<OpenGLTexture2D>(width, height);
 
 		}
 		RE_CORE_ASSERT(false, "Unknown Renderer API!");
 		return nullptr;
 	}
+	Ref<Texture2D> Texture2D::Create(const std::string& path) {
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::None:
+			RE_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
+			return nullptr;
 
+		case RendererAPI::API::OpenGL:
+			return CreateRef<OpenGLTexture2D>(path);
+
+		}
+		RE_CORE_ASSERT(false, "Unknown Renderer API!");
+		return nullptr;
+	}
 }

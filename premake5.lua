@@ -17,6 +17,7 @@ IncludeDir["GLFW"] = "RealEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "RealEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "RealEngine/vendor/imgui"
 IncludeDir["glm"] = "RealEngine/vendor/glm"
+IncludeDir["stb_image"] = "RealEngine/vendor/stb_image"
 
 include "RealEngine/vendor/GLFW"
 include "RealEngine/vendor/Glad"
@@ -40,6 +41,8 @@ project "RealEngine"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -54,7 +57,8 @@ project "RealEngine"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 	links
 	{

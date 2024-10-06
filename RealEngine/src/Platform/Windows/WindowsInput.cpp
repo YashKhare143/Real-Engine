@@ -1,7 +1,7 @@
 #include "repch.h"
 #include "WindowsInput.h"
-#include "RealEngine/Application.h"
-#include "RealEngine/Input.h"
+#include "RealEngine/Core/Application.h"
+#include "RealEngine/Core/Input.h"
 #include <GLFW/glfw3.h>
 
 namespace RealEngine {

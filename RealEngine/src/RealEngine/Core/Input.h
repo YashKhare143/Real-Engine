@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RealEngine/Core.h"
+#include "RealEngine/Core/Core.h"
 
 namespace RealEngine {
 	class RE_API Input {

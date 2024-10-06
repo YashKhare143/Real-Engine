@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>repch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;RE_PLATFORM_WINDOWS;RE_BUILD_DLL;GLFW_INCLUDE_NONE;RE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -98,7 +98,7 @@
       <PrecompiledHeaderFile>repch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;RE_PLATFORM_WINDOWS;RE_BUILD_DLL;GLFW_INCLUDE_NONE;RE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -123,7 +123,7 @@
       <PrecompiledHeaderFile>repch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;RE_PLATFORM_WINDOWS;RE_BUILD_DLL;GLFW_INCLUDE_NONE;RE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -144,32 +144,42 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGl\OpenGLBuffer.h" />
-    <ClInclude Include="src\Platform\OpenGl\OpenGLVertexArray.h" />
-    <ClInclude Include="src\RealEngine\Renderer\Buffer.h" />
-    <ClInclude Include="src\RealEngine\Renderer\Renderer.h" />
-    <ClInclude Include="src\RealEngine\Renderer\Shader.h" />
     <ClInclude Include="src\Platform\OpenGl\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGl\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGl\OpenGLShader.h" />
+    <ClInclude Include="src\Platform\OpenGl\OpenGLTexture.h" />
+    <ClInclude Include="src\Platform\OpenGl\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\RealEngine.h" />
-    <ClInclude Include="src\RealEngine\Application.h" />
-    <ClInclude Include="src\RealEngine\Core.h" />
-    <ClInclude Include="src\RealEngine\EntryPoint.h" />
-    <ClInclude Include="src\RealEngine\EventFormatter.h" />
+    <ClInclude Include="src\RealEngine\Core\Application.h" />
+    <ClInclude Include="src\RealEngine\Core\Core.h" />
+    <ClInclude Include="src\RealEngine\Core\EntryPoint.h" />
+    <ClInclude Include="src\RealEngine\Core\EventFormatter.h" />
+    <ClInclude Include="src\RealEngine\Core\Input.h" />
+    <ClInclude Include="src\RealEngine\Core\KeyCodes.h" />
+    <ClInclude Include="src\RealEngine\Core\Layer.h" />
+    <ClInclude Include="src\RealEngine\Core\LayerStack.h" />
+    <ClInclude Include="src\RealEngine\Core\Log.h" />
+    <ClInclude Include="src\RealEngine\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\RealEngine\Core\Timestep.h" />
+    <ClInclude Include="src\RealEngine\Core\Window.h" />
     <ClInclude Include="src\RealEngine\Events\ApplicationEvent.h" />
     <ClInclude Include="src\RealEngine\Events\Event.h" />
     <ClInclude Include="src\RealEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\RealEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\RealEngine\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\RealEngine\Input.h" />
-    <ClInclude Include="src\RealEngine\KeyCodes.h" />
-    <ClInclude Include="src\RealEngine\Layer.h" />
-    <ClInclude Include="src\RealEngine\LayerStack.h" />
-    <ClInclude Include="src\RealEngine\Log.h" />
-    <ClInclude Include="src\RealEngine\MouseButtonCodes.h" />
+    <ClInclude Include="src\RealEngine\Renderer\Buffer.h" />
     <ClInclude Include="src\RealEngine\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\RealEngine\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\RealEngine\Renderer\OrthographicCameraController.h" />
+    <ClInclude Include="src\RealEngine\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\RealEngine\Renderer\Renderer.h" />
+    <ClInclude Include="src\RealEngine\Renderer\Renderer2D.h" />
+    <ClInclude Include="src\RealEngine\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\RealEngine\Renderer\Shader.h" />
+    <ClInclude Include="src\RealEngine\Renderer\Texture.h" />
     <ClInclude Include="src\RealEngine\Renderer\VertexArray.h" />
-    <ClInclude Include="src\RealEngine\Window.h" />
     <ClInclude Include="src\repch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
@@ -587,26 +597,37 @@
     <ClInclude Include="vendor\glm\glm\vec3.hpp" />
     <ClInclude Include="vendor\glm\glm\vec4.hpp" />
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
+    <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGl\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGl\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\RealEngine\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\RealEngine\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\RealEngine\Renderer\Shader.cpp" />
     <ClCompile Include="src\Platform\OpenGl\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGl\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGl\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGl\OpenGLTexture.cpp" />
+    <ClCompile Include="src\Platform\OpenGl\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\RealEngine\Application.cpp" />
+    <ClCompile Include="src\RealEngine\Core\Application.cpp" />
+    <ClCompile Include="src\RealEngine\Core\Layer.cpp" />
+    <ClCompile Include="src\RealEngine\Core\LayerStack.cpp" />
+    <ClCompile Include="src\RealEngine\Core\Log.cpp" />
     <ClCompile Include="src\RealEngine\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\RealEngine\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\RealEngine\Layer.cpp" />
-    <ClCompile Include="src\RealEngine\LayerStack.cpp" />
-    <ClCompile Include="src\RealEngine\Log.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\RealEngine\Renderer\Texture.cpp" />
     <ClCompile Include="src\RealEngine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\repch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

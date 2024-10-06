@@ -1,14 +1,25 @@
 #pragma once
-
+#include "RenderCommand.h"
+#include "OrthographicCamera.h"
+#include "Shader.h"
 namespace RealEngine {
-	enum class RendererAPI {
-		None = 0, OpenGL = 1
-	};
 
 	class Renderer {
 	public:
-		inline static RendererAPI GetAPI() { return s_RendererAPI; };
+
+		static void Init();	
+		static void OnWindowResize(uint32_t width, uint32_t height);
+		static void BeginScene(const OrthographicCamera& Camera);
+		static void EndScene();
+		static void Submit(const Ref<Shader> shader ,const Ref<VertexArray>& vertedArray, const glm::mat4& transform = glm::mat4(1.0f))	;
+
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); };
 	private:
-		static RendererAPI s_RendererAPI;
+		struct SceneData {
+			glm::mat4 ViewProjectionMatrix;
+		};
+
+		static SceneData* m_SceneData;
+
 	};
 }

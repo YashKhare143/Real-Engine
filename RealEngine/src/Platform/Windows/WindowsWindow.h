@@ -1,5 +1,5 @@
 #pragma once
-#include "RealEngine/Window.h"
+#include "RealEngine/Core/Window.h"
 #include "RealEngine/Renderer/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 
@@ -13,7 +13,7 @@ public:
 	virtual ~WindowsWindow();
 
 	void WindowOnUpdate() override;
-
+	
 	inline unsigned int GetWidth() const override { return m_Data.Width; }
 	inline unsigned int GetHeight() const override { return m_Data.Height; }
 
