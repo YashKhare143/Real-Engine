@@ -10,6 +10,7 @@ namespace RealEngine {
 	LayerStack::~LayerStack() 
 	{
 		for (Layer* layer : m_layers) {
+			layer->OnDetach();
 			delete layer;
 		}
 	}
@@ -26,6 +27,8 @@ namespace RealEngine {
 	{
 		auto it = std::find(m_layers.begin(), m_layers.end(), layer);
 		if (it != m_layers.end()) {
+
+			layer->OnDetach();
 			m_layers.erase(it);
 			m_layerInsertIndex--;
 		}
@@ -34,6 +37,7 @@ namespace RealEngine {
 	{
 		auto it = std::find(m_layers.begin(), m_layers.end(), overlay);
 		if (it != m_layers.end()) {
+			overlay->OnDetach();
 			m_layers.erase(it);
 
 		}

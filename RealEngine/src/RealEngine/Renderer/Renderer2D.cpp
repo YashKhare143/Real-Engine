@@ -16,6 +16,8 @@ namespace RealEngine {
 	static Renderer2DStorage* s_Data;
 	void Renderer2D::Init()
 	{
+		RE_PROFILE_FUNC();
+
 		s_Data = new Renderer2DStorage();
 		s_Data->QuadVertexArray = VertexArray::Create();
 
@@ -48,6 +50,7 @@ namespace RealEngine {
 		s_Data->QuadVertexArray->SetIndexBuffer(m_SquareIB);
 
 		s_Data->m_WhiteTexture = Texture2D::Create(1, 1);
+
 		static uint32_t WhiteTextureData = 0xffffffff;
 		s_Data->m_WhiteTexture->SetData(&WhiteTextureData, sizeof(uint32_t));
 		////Creating Square Texture Shader
@@ -61,17 +64,23 @@ namespace RealEngine {
 
 	void Renderer2D::Shutdown()
 	{
+		RE_PROFILE_FUNC();
+
 		delete s_Data;
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
+		RE_PROFILE_FUNC();
+
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 	}
 
 	void Renderer2D::EndScene()
 	{
+		RE_PROFILE_FUNC();
+
 	}
 
 	void Renderer2D::DrawQuard(const glm::vec2& pos, float rotation, const glm::vec2& scale, const glm::vec4& color)
@@ -81,14 +90,17 @@ namespace RealEngine {
 
 	void Renderer2D::DrawQuard(const glm::vec3& pos, float rotation, const glm::vec2& scale,const glm::vec4& color)
 	{
-		s_Data->TextureShader->Bind();
+		RE_PROFILE_FUNC();
+
+		//s_Data->TextureShader->Bind();
+		s_Data->TextureShader->SetFloat4("u_Color", color);
 		s_Data->m_WhiteTexture->Bind();
 
-		s_Data->TextureShader->SetFloat4("u_Color", color);
+		s_Data->TextureShader->SetFloat("u_TilingFactor", 1.0f);
 
-		glm::mat4 transform =	glm::translate(glm::mat4(1.0f), pos) *
-								glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f)) *
-								glm::scale(glm::mat4(1.0f), glm::vec3(scale, 1.0f));	
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) *
+			glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f)) *
+			glm::scale(glm::mat4(1.0f), glm::vec3(scale, 1.0f));
 
 		s_Data->TextureShader->SetMat4("u_Transform", transform);
 
@@ -99,11 +111,18 @@ namespace RealEngine {
 
 	void Renderer2D::DrawQuard(const glm::vec2& pos, float rotation, const glm::vec2& scale, const Ref<Texture2D>& texture, const glm::vec4& tint)
 	{
+
 		DrawQuard({ pos.x, pos.y, 0.0f }, rotation, scale, texture, tint);
 	}
 
 	void Renderer2D::DrawQuard(const glm::vec3& pos, float rotation, const glm::vec2& scale, const Ref<Texture2D>& texture, const glm::vec4& tint)
 	{
+
+		RE_PROFILE_FUNC();
+
+		s_Data->TextureShader->SetFloat4("u_Color", tint);
+		s_Data->TextureShader->SetFloat("u_TilingFactor", 1.0f);
+
 		texture->Bind();
 		s_Data->TextureShader->Bind();
 
@@ -112,7 +131,6 @@ namespace RealEngine {
 			glm::scale(glm::mat4(1.0f), glm::vec3(scale, 1.0f));
 
 		s_Data->TextureShader->SetMat4("u_Transform", transform);
-		s_Data->TextureShader->SetFloat4("u_Color", tint);
 
 		s_Data->QuadVertexArray->Bind();
 		RenderCommand::DrawIndex(s_Data->QuadVertexArray);

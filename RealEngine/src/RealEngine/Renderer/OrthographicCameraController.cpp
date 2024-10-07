@@ -9,6 +9,8 @@ namespace RealEngine {
 	}
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
+		RE_PROFILE_FUNC();
+
 
 		if (Input::IsKeyPressed(RE_KEY_W) || Input::IsKeyPressed(RE_KEY_UP))
 		{
@@ -45,6 +47,8 @@ namespace RealEngine {
 	}
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
+		RE_PROFILE_FUNC();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(RE_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 
@@ -52,6 +56,8 @@ namespace RealEngine {
 	}
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		RE_PROFILE_FUNC();
+
 		m_ZoomLevel -= e.GetYOffset() * 0.5;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
@@ -60,6 +66,8 @@ namespace RealEngine {
 	}
 	bool OrthographicCameraController::OnWindowResize(WindowResizeEvent& e)
 	{
+		RE_PROFILE_FUNC();
+
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;

@@ -18,6 +18,8 @@ namespace RealEngine {
 
 	OpenGLShader::OpenGLShader(const std::string& path)
 	{
+		RE_PROFILE_FUNC();
+
 		std::string source = ReadFile(path);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);
@@ -33,6 +35,8 @@ namespace RealEngine {
 	}
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) : m_Name(name)
 	{
+		RE_PROFILE_FUNC();
+
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -41,41 +45,61 @@ namespace RealEngine {
 
 	OpenGLShader::~OpenGLShader()
 	{
+		RE_PROFILE_FUNC();
+
 		glDeleteProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Bind() const
 	{
+		RE_PROFILE_FUNC();
+
 		glUseProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
+		RE_PROFILE_FUNC();
+
 		glUseProgram(0);
 	}
 
 
 	void OpenGLShader::SetInt(const std::string& name, const int value) {
+		RE_PROFILE_FUNC();
+
 		UploadUniformInt(name, value);
 	}
 
 	void OpenGLShader::SetFloat(const std::string& name, const float value) {
+		RE_PROFILE_FUNC();
+
 		UploadUniformFloat(name, value);
 	}
 	void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& values) {
+		RE_PROFILE_FUNC();
+
 		UploadUniformFloat2(name, values);
 	}
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& values) {
+		RE_PROFILE_FUNC();
+
 		UploadUniformFloat3(name, values);
 	}
 	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& values) {
+		RE_PROFILE_FUNC();
+
 		UploadUniformFloat4(name, values);
 	}
 
 	void OpenGLShader::SetMat3(const std::string& name, const glm::mat3& matrix) {
+		RE_PROFILE_FUNC();
+
 		UploadUniformMat3(name, matrix);
 	}
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix) {
+		RE_PROFILE_FUNC();
+
 		UploadUniformMat4(name, matrix);
 	}
 
@@ -147,6 +171,8 @@ namespace RealEngine {
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string source)
 	{
+		RE_PROFILE_FUNC();
+
 		std::unordered_map<GLenum, std::string> shaderSource;
 
 		const char* typeToken = "#type";
@@ -171,6 +197,7 @@ namespace RealEngine {
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+		RE_PROFILE_FUNC();
 
 		GLuint program = glCreateProgram();
 

@@ -31,20 +31,26 @@ namespace RealEngine {
 
 	OpenGLVertexArray::OpenGLVertexArray() 
 	{
-		
+		RE_PROFILE_FUNC();
 		glCreateVertexArrays(1, &m_RendererID);
 	}	
+	OpenGLVertexArray::~OpenGLVertexArray() {
+		RE_PROFILE_FUNC();
+		glDeleteVertexArrays(1, &m_RendererID);
+	}
 	void OpenGLVertexArray::Bind() const
 	{
+		RE_PROFILE_FUNC();
 		glBindVertexArray(m_RendererID);
 	}
 	void OpenGLVertexArray::Unbind() const
 	{
+		RE_PROFILE_FUNC();
 		glBindVertexArray(0);
 	}
 	void OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
-
+		RE_PROFILE_FUNC();
 
 		RE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
@@ -66,6 +72,8 @@ namespace RealEngine {
 	}
 	void OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 	{
+		RE_PROFILE_FUNC();
+
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
 

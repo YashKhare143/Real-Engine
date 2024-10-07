@@ -11,6 +11,8 @@
 namespace RealEngine {
 
 	static bool s_GLFWInitialized = false;
+	static int s_GLFWWindowCount = 0;
+
 	static void GLFWErrorCallback(int error_code, const char* description) {
 		RE_ERROR("GLFW Error ({0}): {1}", error_code, description);
 	}
@@ -21,35 +23,42 @@ namespace RealEngine {
 	}
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		RE_PROFILE_FUNC();
 		Init(props);
 	}
 	WindowsWindow::~WindowsWindow()
 	{
+		RE_PROFILE_FUNC();
 		Shutdown();
 	}
 	
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		RE_PROFILE_FUNC();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
 		RE_CORE_INFO("Creating Window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		if (!s_GLFWInitialized)
+		if (s_GLFWWindowCount == 0)
 		{
+			RE_PROFILE_SCOPE("glfwInit");
+
 			int success = glfwInit();
 			RE_ASSERT(success,"Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback); 
-			s_GLFWInitialized = true;
 		}
 
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		{
+			RE_PROFILE_SCOPE("glfwCreateWindow");
+			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+			++s_GLFWWindowCount;
+		}
 
 		m_Context = new OpenGLContext(m_Window); 
 		m_Context->Init();
-
-
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -152,10 +161,13 @@ namespace RealEngine {
 
 	void WindowsWindow::Shutdown()
 	{
+		RE_PROFILE_FUNC();
 		glfwDestroyWindow(m_Window);
 	}
 	void WindowsWindow::WindowOnUpdate()
 	{
+		RE_PROFILE_FUNC();
+
 		glfwPollEvents();
 
 		m_Context->SwapBuffers();
@@ -163,6 +175,8 @@ namespace RealEngine {
 	}
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		RE_PROFILE_FUNC();
+
 		if (enabled)
 			glfwSwapInterval(1);
 		else

@@ -16,6 +16,8 @@ namespace RealEngine {
 	
 
 	Application::Application() {
+		RE_PROFILE_FUNC();
+
 		RE_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
@@ -30,21 +32,28 @@ namespace RealEngine {
 		
 
 	};
-	Application::~Application() {};
+	Application::~Application() {
+		RE_PROFILE_FUNC();
+		Renderer::Shutdown();
+	};
 	
 	void Application::PushLayer(Layer* layer)
 	{
+		RE_PROFILE_FUNC();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 	void Application::PushOverlay(Layer* overlay)
 	{
+		RE_PROFILE_FUNC();
+
 		m_LayerStack.PushOverlay(overlay);
 		overlay->OnAttach();
 	}
 		
 	void Application::OnEvent(Event& e) {
-
+		RE_PROFILE_FUNC();
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
@@ -61,26 +70,32 @@ namespace RealEngine {
 	};
 
 	void Application::Run() {
-		
+		RE_PROFILE_FUNC();
 		while (m_Running)
 		{
-
+			RE_PROFILE_SCOPE("RunLoop");
 			float time = (float)glfwGetTime(); // (todo): Make it platform specific
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			if (!m_Minimized) {
-				for (Layer* layer : m_LayerStack) {
-					layer->OnUpdate(timestep);
+				{
+					RE_PROFILE_SCOPE("LayerStack OnUpdate");
+					for (Layer* layer : m_LayerStack) {
+						layer->OnUpdate(timestep);
+					}
 				}
-			}
 
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack) {
-				layer->OnImGuiRender();
-			}
-			m_ImGuiLayer->End();
+				m_ImGuiLayer->Begin();
+				{
+					RE_PROFILE_SCOPE("LayerStack OnImGuiRender");
+					for (Layer* layer : m_LayerStack) {
+						layer->OnImGuiRender();
+					}
+				}
+				m_ImGuiLayer->End();
 
+			}
 			m_Window->WindowOnUpdate();
 		}
 	}
@@ -95,6 +110,8 @@ namespace RealEngine {
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		RE_PROFILE_FUNC();
+
 		RE_ERROR("({0}): {1}", e.GetWidth(), e.GetHeight());
 		if (e.GetWidth() == 0 || e.GetHeight() == 0) {
 			m_Minimized = true;

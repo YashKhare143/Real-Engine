@@ -1,6 +1,6 @@
 #pragma once
-
-
+#include "RealEngine/Core/Core.h"
+#include "repch.h"
 
 #ifdef RE_PLATFORM_WINDOWS
 
@@ -10,13 +10,17 @@
 
 		RealEngine::Log::Init();
 
-		RE_CORE_WARN("Initialize!");
-		int a = 5;
-		RE_ERROR("Hello! Var={0}", a);
+		RE_PROFILE_BEGIN_SESSION("Startup", "RealEnineProfile-Startup.json");
+			auto app = RealEngine::CreateApplication();
+		RE_PROFILE_END_SESSION();
 
-		auto app = RealEngine::CreateApplication();
-		app->Run();
-		delete app;
+		RE_PROFILE_BEGIN_SESSION("Runtime", "RealEnineProfile-Runtime.json");
+			app->Run();
+		RE_PROFILE_END_SESSION();
+
+		RE_PROFILE_BEGIN_SESSION("Shutdown", "RealEnineProfile-Shutdown.json");
+			delete app;
+		RE_PROFILE_END_SESSION();
 	}
 
 #endif 

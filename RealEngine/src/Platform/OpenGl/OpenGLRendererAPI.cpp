@@ -6,6 +6,8 @@
 namespace RealEngine {
 	void OpenGLRendererAPI::Init()
 	{
+		RE_PROFILE_FUNC();
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -29,5 +31,6 @@ namespace RealEngine {
 	void OpenGLRendererAPI::DrawIndex(const Ref<VertexArray>& vertexArray)
 	{
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

@@ -27,13 +27,5 @@ private:
 	glm::vec4 m_HeartTextureTint = { 1.0f, 1.0f, 1.0f, 1.0f };
 	glm::vec4 SquareColor2 = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-
-	struct ProfileResult {
-		const char* Name;
-		float Time;
-	};
-
-	std::vector<ProfileResult>	m_ProfileResults;
-
 };
 
