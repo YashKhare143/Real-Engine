@@ -36,19 +36,24 @@ void Sandbox2D::OnUpdate(RealEngine::Timestep ts)
 
 	{
 		RE_PROFILE_SCOPE("Renderer Prep");
-		RealEngine::RenderCommand::SetClearColor({ 0.203, 0.176, 0.2 , 1 });
+		RealEngine::RenderCommand::SetClearColor({ 0.138, 0.138, 0.138 , 1 });
 		RealEngine::RenderCommand::Clear();
 	}
 
 	{
-		RE_PROFILE_SCOPE("Renderer Draw");
-		RealEngine::Renderer2D::BeginScene(m_CameraController.GetCamera());
+		//RE_PROFILE_SCOPE("Renderer Draw");
+		//RealEngine::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-			RealEngine::Renderer2D::DrawQuard({0.0f,0.0f},	30.0f, {1.0f,1.0f}, m_HeartTexture, m_HeartTextureTint);
-			RealEngine::Renderer2D::DrawQuard({1.5f,0.0f},	0.0f, {0.8f,1.2f}, SquareColor2);
-			RealEngine::Renderer2D::DrawQuard({0.0f,0.0f, -0.1f},	0.0f, {10.0f,10.0f}, m_DotTexture, m_DotTextureTint);
+			//RealEngine::Renderer2D::DrawRotatedQuard({2.55f,0.0f}, glm::radians(20.0f), {0.8f,1.2f}, SquareColor2);
+			//RealEngine::Renderer2D::DrawRotatedQuard({-2.0f,0.0f, 0.0f}, glm::radians(90.0f), {1.0f,1.0f}, m_HeartTexture, m_HeartTextureTint);
 
-		RealEngine::Renderer2D::EndScene();
+			//RealEngine::Renderer2D::DrawQuard({0.0f,0.0f}, {1.0f,1.0f}, m_HeartTexture, m_HeartTextureTint);
+			//RealEngine::Renderer2D::DrawQuard({2.55f,0.0f}, {0.8f,1.2f}, SquareColor2);
+			//RealEngine::Renderer2D::DrawQuard({1.5f,0.0f}, {0.8f,1.2f}, SquareColor2);
+			//RealEngine::Renderer2D::DrawQuard({0.0f,0.0f, 0.0f}, {10.0f,10.0f}, m_DotTexture, m_DotTextureTint);
+
+
+		//RealEngine::Renderer2D::EndScene();
 
 	}
 

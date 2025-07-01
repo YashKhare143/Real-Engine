@@ -18,8 +18,8 @@ namespace RealEngine {
 			s_RendererAPI->Clear();
 		};
 
-		inline static void DrawIndex(const Ref<VertexArray>& vertexArray) {
-			s_RendererAPI->DrawIndex(vertexArray);
+		inline static void DrawIndex(const Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) {
+			s_RendererAPI->DrawIndex(vertexArray, indexCount);
 		};
 
 	private:

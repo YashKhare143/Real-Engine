@@ -197,7 +197,7 @@ class Sandbox : public RealEngine::Application
 public:
 	Sandbox() {
 		//PushLayer(new ExampleLayer());
-		PushLayer(new Sandbox2D());
+		//PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox() {
